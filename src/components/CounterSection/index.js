@@ -7,20 +7,35 @@ class CounterSection extends Component {
     super(props)
     this.state={
       count:0,
+      mode: true,
+      step:1,      
     }
   }
-  childrenHandlerCounter=()=>{
-    this.setState((state)=>{return {count:state.count + 1}})
+  switchMode=()=>{
+    this.setState((state)=>{return {mode: !state.mode}})
   }
-  // parentHandlerCoutner=()=>{
-  //   this.setState({count:this.state.count + 1})
-  // }
+  childrenHandlerCounter=(num)=>{
+    this.setState((state)=>{      
+      if(state.mode){
+        return {count:state.count + Number(num)}
+      }      
+      return {count:state.count - Number(num)}
+    })      
+  }
+  handleInput = ({target:{value}}) =>  {  
+     
+    if(value>0){
+      return this.setState({step:value})};    
+    } 
+    
+  
 
   render() {
+    const {count, step, mode} = this.state;
     return (
-      <form onSubmit={(e)=>{e.preventDefault()}}>
-        <Counter childrenHandlerCounter={this.childrenHandlerCounter} count={this.state.count}/>
-        <input type='text' name='step'></input>
+      <form className={style.section} onSubmit={(e)=>{e.preventDefault()}}>
+        <Counter switchMode={this.switchMode} childrenHandlerCounter={this.childrenHandlerCounter} count={count} step={step} mode={mode}/>
+        <input className={style.input}  onChange={this.handleInput} type='number' name='step' placeholder='Enter Step another from 1'></input>
       </form>
     );
   }

@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 
-class Counter extends Component {
-  // childrenHandlerCounter=()=>{
-    
-  // }
-  toggler=(e)=>{
-console.log(e);
+class Counter extends Component {  
+  changeText=(mode)=>{
+    return mode?'Add':'Sub';
   }
-  render() {
-    console.log(this.props)
-    const {count, childrenHandlerCounter} = this.props;
+  render() {    
+    const {count,step, childrenHandlerCounter, switchMode, mode} = this.props;
     return (
     <>
       <h2>{count}</h2>
-      <button onClick={this.toggler()} value='Toggle'>Toggler</button>
-      <button onClick={()=>childrenHandlerCounter()} value='Add'>Submit "Add/Sub"</button>
+      <button onClick={()=>switchMode()} value='Toggle'>Toggler</button>
+      <button onClick={()=>childrenHandlerCounter(step)} >Submit "{this.changeText(mode)} "</button>
+      <span>Our step is: {step}</span>
     </>  
     );
   }
