@@ -10,7 +10,7 @@ class Counter extends Component {
     <>
       <h2>{count}</h2>
       <button onClick={()=>switchMode()} value='Toggle'>Toggler</button>
-      <button onClick={()=>childrenHandlerCounter(step)} >Submit "{this.changeText(mode)} "</button>
+      <button onClick={()=>childrenHandlerCounter(step)}>Submit "{this.changeText(mode)} "</button>
       <span>Our step is: {step}</span>
     </>  
     );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Counter from './Counter';
+import CounterField from './CounterField';
 import style from './CounterSection.module.css'
 
 class CounterSection extends Component {
@@ -22,20 +23,21 @@ class CounterSection extends Component {
       return {count:state.count - Number(num)}
     })      
   }
-  handleInput = ({target:{value}}) =>  {  
-     
+  handlerInput = ({target:{value}}) =>  {     
     if(value>0){
       return this.setState({step:value})};    
-    } 
-    
-  
+    }   
 
   render() {
     const {count, step, mode} = this.state;
     return (
-      <form className={style.section} onSubmit={(e)=>{e.preventDefault()}}>
-        <Counter switchMode={this.switchMode} childrenHandlerCounter={this.childrenHandlerCounter} count={count} step={step} mode={mode}/>
-        <input className={style.input}  onChange={this.handleInput} type='number' name='step' placeholder='Enter Step another from 1'></input>
+      <form className={style.section}   
+            onSubmit={(e)=>{e.preventDefault()}}>
+        <Counter switchMode={this.switchMode} 
+                  childrenHandlerCounter={this.childrenHandlerCounter} 
+                  count={count} step={step} mode={mode}/>        
+        <CounterField className={style.input} 
+                      handleInput={this.handlerInput}/>
       </form>
     );
   }
